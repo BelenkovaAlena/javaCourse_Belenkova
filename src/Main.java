@@ -1,5 +1,5 @@
 import java.util.Scanner;
-import java.lang.Math;
+//import java.lang.Math;
 
 public class Main {
 
@@ -16,8 +16,8 @@ public class Main {
         System.out.println("3. Выход");
         System.out.println("Выберите пункт меню:");
         Scanner scr = new Scanner(System.in);
-        int menu = scr.nextInt();
-        mainMenu(menu);
+        int vvod = scr.nextInt();
+        mainMenu(vvod);
     }
 
     public static void vvodDannih() {
@@ -26,35 +26,19 @@ public class Main {
         String str = scr.nextLine();
         String specsim;
         str = str.replaceAll("\\s+", " ");
-
         String str_2 = str.trim();
-        //System.out.println("str_2: " + str_2);
-       // String str_3 = str_2.replaceAll("[^-?0-9]+", " ");
-       // System.out.println("str_3: " + str_3);
-        String[] subst = str_2.split(" ");
-//        for (int i = 0; i < subst.length; i++){
-//            System.out.println("copystr: " + subst[i].trim());
-//        }
-        specsim = findSpecSymbol(subst);
-        //System.out.println("спецсимвол: "+ specsim);
-
-//        char[] stroka = str.toCharArray();
-//        String[] symb = new String[str.length()];
-//        for (int i = 0; i < str.length(); i++){
-//            symb[i]= String.valueOf(stroka[i]);
-//            //System.out.println(symb[i]);
-//        }
-//        specsim = findSpecSymbol(symb);
+        String[] words = str_2.split(" ");
+        specsim = findSpecSymbol(words);
 
         if (specsim.length() > 1){
             System.out.println(specsim);
             globalMenu();
         }
-        String[] words = str_2.split("[*+/^!?-]");
+
         //для вычисления факториала
         if (!specsim.equals("!")){
             zn_a = Integer.parseInt(words[0].trim());
-            zn_b = Integer.parseInt(words[1].trim());
+            zn_b = Integer.parseInt(words[2].trim());
         }
         else
             zn_a = Integer.parseInt(words[0].trim());
@@ -63,9 +47,9 @@ public class Main {
 
     public static String findSpecSymbol(String[] mas){
         String specialCharacters = "*+/^!?-";
-        for (int i = 0; i < mas.length; i++)
-            if (specialCharacters.contains(mas[i])){
-                return (mas[i].trim());
+        for (String ma : mas)
+            if (specialCharacters.contains(ma)) {
+                return (ma.trim());
             }
         return "Не введен символ операции!";
     }
@@ -116,33 +100,33 @@ public class Main {
         {
             case "1":
             case "+":
-                System.out.println("Сумма чисел = " + summation(a, b));
+                System.out.println("Сумма чисел " + a + " и " + b + " = " + summation(a, b));
                 result = summation(a, b);
                 globalMenu();
                 break;
             case "2":
             case "-":
-                System.out.println("Разность чисел = " + difference(a, b));
+                System.out.println("Разность чисел " + a + " и " + b + " = " + difference(a, b));
                 result = difference(a, b);
                 globalMenu();
                 break;
             case "3":
             case "*":
-                System.out.println("Произведение чисел = " + multiplic(a, b));
+                System.out.println("Произведение чисел " + a + " и " + b + " = " + multiplic(a, b));
                 result = multiplic(a, b);
                 globalMenu();
                 break;
             case "4":
             case "/":
                 if (b != 0){
-                System.out.println("Частное чисел = " + division(a, b));
+                System.out.println("Частное чисел " + a + " и " + b + " = " + division(a, b));
                 result = (int)division(a, b);}
                 else System.out.println("Делитель не должен быть равен 0!");
                 globalMenu();
                 break;
             case "5":
             case "!":
-                System.out.println("Факториал числа = " + factorial(a));
+                System.out.println("Факториал числа " + a + " = " + factorial(a));
                 result = factorial(a);
                 globalMenu();
                 break;
@@ -155,7 +139,7 @@ public class Main {
             case "7":
             case "?":
                 comparing(a, b);
-                result = a;
+                result = 0;
                 globalMenu();
                 break;
             case "0":
